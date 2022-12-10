@@ -1,0 +1,174 @@
+ === reverse  a linked list
+ by 3 method itrative and recusions ke 2 method
+
+ case 1: 
+/****************************************************************
+
+    Following is the class structure of the LinkedListNode class:
+
+    template <typename T>
+    class LinkedListNode
+    {
+    public:
+        T data;
+        LinkedListNode<T> *next;
+        LinkedListNode(T data)
+        {
+            this->data = data;
+            this->next = NULL;
+        }
+    };
+
+********************************************************************/
+LinkedListNode<int> *reverseLinkedList(LinkedListNode<int> *head) 
+{
+    if(head==NULL || head->next == NULL)
+    {
+         return head;
+    }
+    LinkedListNode<int>*curr = head;
+    LinkedListNode<int> *prev =NULL;
+    LinkedListNode<int> *forward =NULL;
+    
+    while(curr!=NULL)
+    {
+        forward = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = forward;
+    }
+    return prev;
+}
+
+
+case 2:
+*****************************************************************/
+void reverse(LinkedListNode<int> *&head , LinkedListNode<int> *curr , LinkedListNode<int> *prev)
+{
+    // base case
+    if(curr==NULL)
+    {
+        head = prev;
+        return;
+    }
+    LinkedListNode<int> *forward = curr->next;
+    reverse(head, forward, curr);
+    curr->next =prev;
+        
+}
+LinkedListNode<int> *reverseLinkedList(LinkedListNode<int> *&head) 
+{  // case 2 hai recursive
+        LinkedListNode<int> *curr= head;
+    LinkedListNode<int> *prev=NULL;
+    
+    reverse(head,curr ,prev);
+    return head;
+    
+    
+    //case 1 hai loop se..
+    
+    /*
+    if(head==NULL || head->next == NULL)
+    {
+         return head;
+    }
+    LinkedListNode<int>*curr = head;
+    LinkedListNode<int> *prev =NULL;
+    LinkedListNode<int> *forward =NULL;
+    
+    while(curr!=NULL)
+    {
+        forward = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = forward;
+    }
+    return prev;*/
+}
+
+**************************************************************/
+case3:
+/****************************************************************
+
+    Following is the class structure of the LinkedListNode class:
+
+    template <typename T>
+    class LinkedListNode
+    {
+    public:
+        T data;
+        LinkedListNode<T> *next;
+        LinkedListNode(T data)
+        {
+            this->data = data;
+            this->next = NULL;
+        }
+    };
+
+*****************************************************************/
+LinkedListNode<int> *reverse1(LinkedListNode<int> *&head)
+{
+    //base case
+    if(head==NULL||head->next==NULL)
+    {
+        return head;
+    }
+    LinkedListNode<int> *chotahead = reverse1(head->next);
+    head->next->next= head;
+    head->next=NULL;
+    return chotahead;
+}
+
+
+
+void reverse(LinkedListNode<int> *&head , LinkedListNode<int> *curr , LinkedListNode<int> *prev)
+{
+    
+    // base case
+    if(curr==NULL)
+    {
+        head = prev;
+        return;
+    }
+    LinkedListNode<int> *forward = curr->next;
+    reverse(head, forward, curr);
+    curr->next =prev;
+        
+}
+
+LinkedListNode<int> *reverseLinkedList(LinkedListNode<int> *&head) 
+{  
+    //case 3 ek head ko solve hum karenge baki ko recursion..
+    return reverse1(head);
+    
+    
+    /*
+    // case 2 hai recursive
+       
+    LinkedListNode<int> *curr= head;
+    LinkedListNode<int> *prev=NULL;
+    
+    reverse(head,curr ,prev);
+    return head;
+    
+    
+    //case 1 hai loop se..
+    
+    /*
+    if(head==NULL || head->next == NULL)
+    {
+         return head;
+    }
+    LinkedListNode<int>*curr = head;
+    LinkedListNode<int> *prev =NULL;
+    LinkedListNode<int> *forward =NULL;
+    
+    while(curr!=NULL)
+    {
+        forward = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = forward;
+    }
+    return prev;*/
+}
